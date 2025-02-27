@@ -1,105 +1,108 @@
 # > Documentación ejercicio realizado
-  # Despliegue de Infraestructura en Azure con Terraform
 
-  Este documento explica paso a paso cómo configuré e implementé la infraestructura en Azure utilizando Terraform siguiendo el ejemplo de `azfunction`.
-  
-  ## 1. Instalación de Prerrequisitos
-  
-  ### Instalación de Terraform
-  
-  1. Descarga Terraform desde [terraform.io/downloads](https://developer.hashicorp.com/terraform/downloads).
-  2. Ejecución de los comandos para la instalación en Ubuntu.
-  3. Verificar la instalación ejecutando:
-      
-      ```
-      terraform --version
-      ```
-      
-  
-  ### Instalación de la CLI de Azure
-  
-  1. Descargo e instalo la CLI de Azure desde [docs.microsoft.com/en-us/cli/azure/install-azure-cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
-  
-  ## 2. Autenticación en Azure
-  
-  Inicio sesión en Azure con tu cuenta de estudiante:
-  
-  ```
-  az login
-  
-  ```
-  
-  La ejecución del comando me pide hacer login a través del navegador, posterior a ello ya se crea lo necesario para obtener el `subscriptor_id` que se usará para el provider en el `main.tf`
-  
-  ## 3. Creación de la Infraestructura con Terraform
-  
-  ### 3.1. Inicializar Terraform
-  
-  Dado que era la primera vez que uso Terraform en este proyecto, inicializo el directorio con:
-  
-  ```
-  terraform init
-  ```
-  
-  ### 3.2. Validar la configuración
-  
-  Antes de aplicar los cambios, verifico que la configuración sea válida:
-  
-  ```
-  terraform validate
-  ```
-  
-  ### 3.3. Formatear archivos Terraform
-  
-  Para mantener un formato de código limpio y uniforme, ejecuto:
-  
-  ```
-  terraform fmt
-  ```
-  
-  ### 3.4. Previsualizar cambios
-  
-  Ejecuta un plan para ver los recursos que se crearán:
-  
-  ```
-  terraform plan
-  ```
-  
-  ### 3.5. Evitar que Terraform pida el nombre de la función
-  
-  Creo un archivo `terraform.tfvars` con el siguiente contenido:
-  
-  ```
-  name_function = "ruo2function"
-  ```
-  
-  Esto permite que `terraform apply` use este valor sin pedirlo manualmente.
-  
-  ### 3.6. Aplicar la configuración
-  
-  Ejecuto el siguiente comando para desplegar la infraestructura en Azure sin tener que escribir manualmente `yes`:
-  
-  ```
-  terraform apply -auto-approve
-  ```
-  
-  ### 3.7. Verificar los recursos creados
-  
-  Una vez completado el despliegue, verifico los recursos desde el portal de Azure
-  
-  ## 4. Eliminación de la Infraestructura
-  
-  Para eliminar todos los recursos creados:
-  
-  ```
-  terraform destroy -auto-approve
-  ```
-  
-  ## 5. Verificación de la eliminación de la infraestructura
-  
-  En azure portal verifico que los recursos hayan sido eliminados correctamente y en su totalidad.
+# Despliegue de Infraestructura en Azure con Terraform
 
-### **Infraestructura como código**
+Este documento explica paso a paso cómo configuré e implementé la infraestructura en Azure utilizando Terraform siguiendo el ejemplo de `azfunction`.
+
+## 1. Instalación de Prerrequisitos
+
+### Instalación de Terraform
+
+1. Descarga Terraform desde [terraform.io/downloads](https://developer.hashicorp.com/terraform/downloads).
+2. Ejecución de los comandos para la instalación en Ubuntu.
+3. Verificar la instalación ejecutando:
+
+   ```
+   terraform --version
+   ```
+
+### Instalación de la CLI de Azure
+
+1. Descargo e instalo la CLI de Azure desde [docs.microsoft.com/en-us/cli/azure/install-azure-cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
+
+## 2. Autenticación en Azure
+
+Inicio sesión en Azure con tu cuenta de estudiante:
+
+```
+az login
+
+```
+
+La ejecución del comando me pide hacer login a través del navegador, posterior a ello ya se crea lo necesario para obtener el `subscriptor_id` que se usará para el provider en el `main.tf`
+
+## 3. Creación de la Infraestructura con Terraform
+
+### 3.1. Inicializar Terraform
+
+Dado que era la primera vez que uso Terraform en este proyecto, inicializo el directorio con:
+
+```
+terraform init
+```
+
+### 3.2. Validar la configuración
+
+Antes de aplicar los cambios, verifico que la configuración sea válida:
+
+```
+terraform validate
+```
+
+### 3.3. Formatear archivos Terraform
+
+Para mantener un formato de código limpio y uniforme, ejecuto:
+
+```
+terraform fmt
+```
+
+### 3.4. Previsualizar cambios
+
+Ejecuta un plan para ver los recursos que se crearán:
+
+```
+terraform plan
+```
+
+### 3.5. Evitar que Terraform pida el nombre de la función
+
+Creo un archivo `terraform.tfvars` con el siguiente contenido:
+
+```
+name_function = "ruo2function"
+```
+
+Esto permite que `terraform apply` use este valor sin pedirlo manualmente.
+
+### 3.6. Aplicar la configuración
+
+Ejecuto el siguiente comando para desplegar la infraestructura en Azure sin tener que escribir manualmente `yes`:
+
+```
+terraform apply -auto-approve
+```
+
+### 3.7. Verificar los recursos creados
+
+Una vez completado el despliegue, verifico los recursos desde el portal de Azure
+![result](images/result.png)
+
+## 4. Eliminación de la Infraestructura
+
+Para eliminar todos los recursos creados:
+
+```
+terraform destroy -auto-approve
+```
+
+![result](images/destroyresult.png)
+
+## 5. Verificación de la eliminación de la infraestructura
+
+En azure portal verifico que los recursos hayan sido eliminados correctamente y en su totalidad.
+
+# **Infraestructura como código**
 
 - **Utilizar archivos de definición**: Todas las herramientas de infraestructura como código tienen un formato propio para definir la infraestructura.
 - **Autodocumentación de procesos y sistemas**: Al utilizar el enfoque de infraestructura como código, podemos reutilizar el código. Es importante que este esté documentado adecuadamente para que otros usuarios comprendan el propósito y funcionamiento del módulo.
@@ -129,7 +132,7 @@ Terraform permite la creación de múltiples ambientes (dev, stage, prod) con di
 
 - **Ambiente de desarrollo (dev)**: Se recomienda utilizar recursos más pequeños y económicos en este ambiente para reducir costos.
 - **Ambiente de producción (prod)**: Aquí es importante configurar instancias y recursos con redundancia y alta disponibilidad.
-  
+
 Ejemplo de estructura para gestionar ambientes:
 
 ```bash
